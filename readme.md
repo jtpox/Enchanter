@@ -80,7 +80,7 @@ The playlist will be rendered centered  around the URL. For example, following t
 https://s3.example.com/streams/e8013a721b39ba502e10/720/fileSequence120.ts
 ```
 
-### Streaming
+#### Streaming
 The name for the sequence of files that you have stored in S3. `{n}` will be replaced with an integer.
 ```
 STREAM_FILE_NAME=fileSequence{n}.ts
@@ -95,6 +95,7 @@ STREAM_SEGMENT_TIME=10
 
 ### Adding Vods
 Vods are to be pre-processed into accepted resolutions (720p and 1080p) and cut into chunks specified in `STREAM_SEGMENT_TIME` and renamed as specified in `STREAM_FILE_NAME` where `{n}` is the playing sequence (starting from 0).
+
 For example, Nisemonogatari episode 8 is *1310s* long and the vod will be cut into 133 parts of chunks up to 10 seconds (according to `STREAM_SEGMENT_TIME`).
 
 The files are then to be uploaded into S3 according to the `folder`  variable in the `episodes` database object.
