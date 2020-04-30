@@ -102,7 +102,10 @@ The files are then to be uploaded into S3 according to the `folder`  variable in
 
 ### Running Service
 To run it normally: `node dist/enchanter.js`
+
 Recommended to run it in pm2: `pm2 start dist/enchanter.js`
+
+Viewing HLS playlist: http://example.com:8080/720||1080
 
 # Libraries Used
 
