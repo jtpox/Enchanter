@@ -1,0 +1,33 @@
+{
+  "name": "enchanter",
+  "version": "1.0.0",
+  "description": "A HLS service that goes through an S3 service.",
+  "main": "enchanter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon enchanter.js --exec babel-node",
+    "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./log,./example,./.babelrc,./readme.md,./.env,./.envsample,./.eslintrc.json,./.gitignore,./package-lock.json,./package.json --copy-files"
+  },
+  "author": "Jian Ting",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-airbnb": "^2.5.3",
+    "chai": "^4.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.3",
+    "rimraf": "^2.6.2",
+    "sinon": "^7.1.1"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.6",
+    "rpc-websockets": "^5.1.1",
+    "winston": "^3.2.1"
+  }
+}

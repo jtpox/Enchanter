@@ -1,0 +1,5 @@
+log/
+src/render.old.js
+.env
+package-lock.json
+node_modules
