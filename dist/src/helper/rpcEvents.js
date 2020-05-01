@@ -10,7 +10,7 @@ exports['default'] = function (rpc, render) {
   rpc.event('requestsList');
 
   // Clear all requests.
-  rpc.register('clearRequests', () => render.clearRequests());
+  rpc.register('clearRequests', () => render.clearRequests())['protected']();
 
   // Get current playing episode.
   rpc.register('currentEpisode', () => render.currentEpisode);
@@ -30,12 +30,12 @@ exports['default'] = function (rpc, render) {
     const [episodeId] = params;
     const request = await render.addRequest(episodeId);
     return request;
-  });
+  })['protected']();
 
   // Interrupt Request.
   rpc.register('interruptRequest', async params => {
     const [episodeId] = params;
     const request = await render.interruptRequest(episodeId);
     return request;
-  });
+  })['protected']();
 };

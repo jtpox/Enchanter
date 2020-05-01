@@ -30,7 +30,8 @@ https://s3.example.com/streams/ff3a4400c588a70563d9/720/fileSequence225.ts
 #EXTINF:10.000,
 https://s3.example.com/streams/ff3a4400c588a70563d9/720/fileSequence226.ts
 ```
-**ff3a4400c588a70563d9** is the ID of the vod.
+**ff3a4400c588a70563d9** is the folder (as stated in the database) where the chunked vods are stored in your S3 instance.
+
 **fileSequence{n}.ts** is the sequence of the pre-processed and chunked vod.
 
 ### RPC Service
