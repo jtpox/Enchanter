@@ -14,7 +14,9 @@ export default class StreamHelper {
   clear() {
     return new Promise((resolve, reject) => {
       this.auth.then(() => {
-        this.rpc.call('clearRequest').then(() => resolve(true)).catch((err) => reject(err));
+        this.rpc.call('clearRequests')
+          .then(() => resolve(true))
+          .catch((err) => reject(err));
       });
     });
   }
@@ -22,7 +24,9 @@ export default class StreamHelper {
   request(id) {
     return new Promise((resolve, reject) => {
       this.auth.then(() => {
-        this.rpc.call('addRequest', [id]).then(() => resolve(true)).catch((err) => reject(err));
+        this.rpc.call('addRequest', [id])
+          .then(() => resolve(true))
+          .catch((err) => reject(err));
       });
     });
   }
@@ -30,20 +34,26 @@ export default class StreamHelper {
   interrupt(id) {
     return new Promise((resolve, reject) => {
       this.auth.then(() => {
-        this.rpc.call('interruptRequest', [id]).then(() => resolve(true)).catch((err) => reject(err));
+        this.rpc.call('interruptRequest', [id])
+          .then(() => resolve(true))
+          .catch((err) => reject(err));
       });
     });
   }
 
   currentEpisode() {
     return new Promise((resolve, reject) => {
-      this.rpc.call('currentEpisode').then((res) => resolve(res)).catch((err) => reject(err));
+      this.rpc.call('currentEpisode')
+        .then((res) => resolve(res))
+        .catch((err) => reject(err));
     });
   }
 
   requestsList() {
     return new Promise((resolve, reject) => {
-      this.rpc.call('requestsList').then((res) => resolve(res)).catch((err) => reject(err));
+      this.rpc.call('requestsList')
+        .then((res) => resolve(res))
+        .catch((err) => reject(err));
     });
   }
 }
