@@ -3,9 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-function registerRender(render) {
+function registerStreamer(streamer) {
   return (req, res, next) => {
-    req.render = render;
+    req.streamer = streamer;
     next();
   };
 }
@@ -17,7 +17,7 @@ async function showPlaylist(req, res) {
     }
 
     res.set('Content-Type', 'application/x-mpegURL');
-    res.send((await req.render.renderPlaylist(req.params.resolution)));
+    res.send((await req.streamer.renderPlaylist(req.params.resolution)));
   } catch (error) {
     res.json({
       error: error.toString()
@@ -25,5 +25,5 @@ async function showPlaylist(req, res) {
   }
 }
 
-exports.registerRender = registerRender;
+exports.registerStreamer = registerStreamer;
 exports.showPlaylist = showPlaylist;

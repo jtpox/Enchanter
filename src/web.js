@@ -4,11 +4,11 @@ import Cors from 'cors';
 
 import Winston from './helper/winston';
 
-import { registerRender, showPlaylist } from './helper/webMiddleware';
+import { registerStreamer, showPlaylist } from './helper/webMiddleware';
 
 export default class WebService {
-  constructor(render) {
-    this.render = render;
+  constructor(streamer) {
+    this.streamer = streamer;
 
     this.app = Express();
     this.registerMiddleware();
@@ -19,7 +19,7 @@ export default class WebService {
   registerMiddleware() {
     this.app.use(Cors());
 
-    this.app.use(registerRender(this.render));
+    this.app.use(registerStreamer(this.streamer));
     this.app.get('/:resolution(|720|1080)', showPlaylist);
   }
 }

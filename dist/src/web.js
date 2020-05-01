@@ -21,8 +21,8 @@ var _webMiddleware = require('./helper/webMiddleware');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 class WebService {
-  constructor(render) {
-    this.render = render;
+  constructor(streamer) {
+    this.streamer = streamer;
 
     this.app = (0, _express2['default'])();
     this.registerMiddleware();
@@ -33,7 +33,7 @@ class WebService {
   registerMiddleware() {
     this.app.use((0, _cors2['default'])());
 
-    this.app.use((0, _webMiddleware.registerRender)(this.render));
+    this.app.use((0, _webMiddleware.registerStreamer)(this.streamer));
     this.app.get('/:resolution(|720|1080)', _webMiddleware.showPlaylist);
   }
 }

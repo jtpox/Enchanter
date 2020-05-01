@@ -1,12 +1,12 @@
 {
   "name": "enchanter",
-  "version": "1.0.0",
-  "description": "A HLS service that goes through an S3 service.",
+  "version": "1.0.1",
+  "description": "A script which allows the live streaming of random pre-processed and chunked vods stored in S3.",
   "main": "enchanter.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon enchanter.js --exec babel-node",
-    "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./log,./example,./.babelrc,./readme.md,./.env,./.envsample,./.eslintrc.json,./.gitignore,./package-lock.json,./package.json --copy-files"
+    "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./log,./example,./.babelrc,./readme.md,./.env,./.envsample,./.eslintrc.json,./.gitignore,./package-lock.json,./package.json,./src/streamer.old.js,./src/render.old.js --copy-files"
   },
   "author": "Jian Ting",
   "license": "MIT",

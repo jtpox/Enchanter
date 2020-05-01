@@ -1,6 +1,7 @@
 import { Server } from 'rpc-websockets';
 
-import Render from './render';
+// import Render from './render';
+import Streamer from './streamer';
 
 import Web from './web';
 
@@ -13,7 +14,7 @@ import rpcEvents from './helper/rpcEvents';
 export default class Service {
   constructor() {
     this.rpc = null;
-    this.render = null;
+    this.streamer = null;
     this.web = null;
 
     this.startRpc();
@@ -33,13 +34,14 @@ export default class Service {
   }
 
   startWeb() {
-    this.web = new Web(this.render);
+    this.web = new Web(this.streamer);
   }
 
   startRender() {
-    this.render = new Render(this.rpc);
-    this.render.startPlaylist();
+    // this.render = new Render(this.rpc);
+    // this.render.startPlaylist();
+    this.streamer = new Streamer(this.rpc);
 
-    rpcEvents(this.rpc, this.render);
+    rpcEvents(this.rpc, this.streamer);
   }
 }

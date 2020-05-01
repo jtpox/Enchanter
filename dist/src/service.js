@@ -6,9 +6,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _rpcWebsockets = require('rpc-websockets');
 
-var _render = require('./render');
+var _streamer = require('./streamer');
 
-var _render2 = _interopRequireDefault(_render);
+var _streamer2 = _interopRequireDefault(_streamer);
 
 var _web = require('./web');
 
@@ -31,7 +31,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 class Service {
   constructor() {
     this.rpc = null;
-    this.render = null;
+    this.streamer = null;
     this.web = null;
 
     this.startRpc();
@@ -51,14 +51,17 @@ class Service {
   }
 
   startWeb() {
-    this.web = new _web2['default'](this.render);
+    this.web = new _web2['default'](this.streamer);
   }
 
   startRender() {
-    this.render = new _render2['default'](this.rpc);
-    this.render.startPlaylist();
+    // this.render = new Render(this.rpc);
+    // this.render.startPlaylist();
+    this.streamer = new _streamer2['default'](this.rpc);
 
-    (0, _rpcEvents2['default'])(this.rpc, this.render);
+    (0, _rpcEvents2['default'])(this.rpc, this.streamer);
   }
 }
 exports['default'] = Service;
+
+// import Render from './render';
