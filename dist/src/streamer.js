@@ -56,7 +56,6 @@ class Streamer {
     if (this.currentEpisode) this.previousEpisode = this.currentEpisode;
 
     let series = null;
-    let playRequest = false; // Used for logging in Winston.
     /*
      * Checks if the requestEpisodes list is empty.
      * Index 0 of requestEpisodes will then be played and removed from list.
@@ -65,13 +64,13 @@ class Streamer {
       [series] = this.requestEpisodes;
       this.requestEpisodes.splice(0, 1);
 
-      playRequest = true;
+      _winston2['default'].info('Playing request: ' + String(series.id));
     } else {
       series = await _episode2['default'].getRandom();
+      _winston2['default'].info('Playing random: ' + String(series.id));
     }
 
-    // Notify logs and RPC.
-    _winston2['default'].info('Playing ' + (playRequest ? 'request' : 'random') + ' ' + String(series.id));
+    // Notify RPC.
     this.rpc.emit('seriesUpdate', series);
     this.rpc.emit('requestsList', [this.requestEpisodes]);
 
@@ -176,12 +175,15 @@ class Streamer {
       return false;
     }
 
+    _winston2['default'].info('Stopped currently playing: ' + String(this.currentEpisode.id) + ' (' + (Math.floor(Date.now() / 1000) - this.episodeStartTime) + 's)');
+
     this.previousEpisode = this.currentEpisode;
     this.currentEpisode = episode;
     this.episodeStartTime = Math.floor(Date.now() / 1000);
 
     await this.setCurrentTimeout(episode);
 
+    _winston2['default'].info('Playing interrupt: ' + String(episode.id));
     this.rpc.emit('seriesUpdate', episode);
     return true;
   }
