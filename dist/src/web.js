@@ -18,6 +18,10 @@ var _winston2 = _interopRequireDefault(_winston);
 
 var _webMiddleware = require('./helper/webMiddleware');
 
+var _series = require('./model/series');
+
+var _series2 = _interopRequireDefault(_series);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 class WebService {
@@ -35,6 +39,10 @@ class WebService {
 
     this.app.use((0, _webMiddleware.registerStreamer)(this.streamer));
     this.app.get('/:resolution(|720|1080)', _webMiddleware.showPlaylist);
+
+    this.app.get('/test', async (req, res) => {
+      res.json((await _series2['default'].findOne({ _id: '5e83657b0da33c281447cd30' }).populate('episodes')));
+    });
   }
 }
 exports['default'] = WebService;

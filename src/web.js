@@ -6,6 +6,8 @@ import Winston from './helper/winston';
 
 import { registerStreamer, showPlaylist } from './helper/webMiddleware';
 
+import Series from './model/series';
+
 export default class WebService {
   constructor(streamer) {
     this.streamer = streamer;
@@ -21,5 +23,9 @@ export default class WebService {
 
     this.app.use(registerStreamer(this.streamer));
     this.app.get('/:resolution(|720|1080)', showPlaylist);
+
+    this.app.get('/test', async (req, res) => {
+      res.json(await Series.findOne({ _id: '5e83657b0da33c281447cd30' }).populate('episodes'));
+    });
   }
 }

@@ -12,37 +12,42 @@ const schema = Db.Schema({
   user: { type: Db.Schema.ObjectId, ref: 'user' },
   createdAt: { type: Date, default: Date.now },
   lastUpdated: { type: Date, default: Date.now },
+}, {
+  toObject: {
+    virtuals: true,
+  },
+  toJSON: {
+    virtuals: true,
+  },
 });
 
-schema.set('toObject', { virtuals: true });
-schema.set('toJSON', { virtuals: true });
+class Episode {
+  get requestLoad() { return false }
 
-schema.virtual('requestLoad').get(() => false);
+  static async getRandom(exclude = null) {
+    const count = (exclude)
+      ? await this.countDocuments({
+        $and: [
+          { id: { $ne: exclude.id } },
+          { enabled: true },
+        ],
+      })
+      : await this.countDocuments({ enabled: true });
+    const rand = Math.floor(Math.random() * count);
 
-schema.statics.getRandom = async function getRandom(exclude = null) {
-  const count = (exclude)
-    ? await this.countDocuments({
-      $and: [
-        { id: { $ne: exclude.id } },
-        { enabled: true },
-      ],
-    })
-    : await this.countDocuments({ enabled: true });
-  const rand = Math.floor(Math.random() * count);
+    const episode = (exclude)
+      ? await this.findOne({
+        $and: [
+          { id: { $ne: exclude.id } },
+          { enabled: true },
+        ],
+      }).skip(rand).populate('series')
+      : await this.findOne({ enabled: true }).skip(rand).populate('series');
+    // console.log(`Get Random: ${episode}`);
 
-  const episode = (exclude)
-    ? await this.findOne({
-      $and: [
-        { id: { $ne: exclude.id } },
-        { enabled: true },
-      ],
-    }).skip(rand).populate('series')
-    : await this.findOne({ enabled: true }).skip(rand).populate('series');
-  // console.log(`Get Random: ${episode}`);
+    return episode;
+  }
+}
 
-  return episode;
-};
-
-const Episode = Db.model('episode', schema);
-
-export default Episode;
+schema.loadClass(Episode);
+export default Db.model('episode', schema);

@@ -22,15 +22,21 @@ const schema = _database2['default'].Schema({
   user: { type: _database2['default'].Schema.ObjectId, ref: 'user' },
   createdAt: { type: Date, 'default': Date.now },
   lastUpdated: { type: Date, 'default': Date.now }
+}, {
+  toObject: {
+    virtuals: true
+  },
+  toJSON: {
+    virtuals: true
+  }
 });
 
-schema.set('toObject', { virtuals: true });
-schema.set('toJSON', { virtuals: true });
+class Episode {
+  get requestLoad() {
+    return false;
+  }
 
-schema.virtual('requestLoad').get(() => false);
-
-schema.statics.getRandom = function () {
-  async function getRandom(exclude = null) {
+  static async getRandom(exclude = null) {
     const count = exclude ? await this.countDocuments({
       $and: [{ id: { $ne: exclude.id } }, { enabled: true }]
     }) : await this.countDocuments({ enabled: true });
@@ -43,10 +49,7 @@ schema.statics.getRandom = function () {
 
     return episode;
   }
+}
 
-  return getRandom;
-}();
-
-const Episode = _database2['default'].model('episode', schema);
-
-exports['default'] = Episode;
+schema.loadClass(Episode);
+exports['default'] = _database2['default'].model('episode', schema);

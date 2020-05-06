@@ -20,18 +20,19 @@ const schema = _database2['default'].Schema({
   poster: { type: String, 'default': null },
   createdAt: { type: Date, 'default': Date.now },
   lastUpdated: { type: Date, 'default': Date.now }
+}, {
+  toObject: {
+    virtuals: true
+  },
+  toJSON: {
+    virtuals: true
+  }
 });
 
-schema.set('toObject', { virtuals: true });
-schema.set('toJSON', { virtuals: true });
-
-/* schema.virtual('episodes').get(async () => {
-  const episodes = await Episode.find({ series: this.id });
-  return episodes;
-}); */
-
-schema.virtual('requestEvent').get(() => false);
-
+/*
+ * No idea how to do this in ES6 classes.
+ * Series.populate('episodes');
+ */
 schema.virtual('episodes', {
   ref: 'episode',
   localField: '_id',
@@ -39,6 +40,11 @@ schema.virtual('episodes', {
   justOne: false
 });
 
-const Series = _database2['default'].model('series', schema);
+class Series {
+  get requestEvent() {
+    return false;
+  }
+}
 
-exports['default'] = Series;
+schema.loadClass(Series);
+exports['default'] = _database2['default'].model('series', schema);
