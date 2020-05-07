@@ -25,7 +25,7 @@ export default class StreamHelper {
     return new Promise((resolve, reject) => {
       this.auth.then(() => {
         this.rpc.call('addRequest', [id])
-          .then(() => resolve(true))
+          .then((res) => resolve(res))
           .catch((err) => reject(err));
       });
     });
@@ -35,7 +35,7 @@ export default class StreamHelper {
     return new Promise((resolve, reject) => {
       this.auth.then(() => {
         this.rpc.call('interruptRequest', [id])
-          .then(() => resolve(true))
+          .then((res) => resolve(res))
           .catch((err) => reject(err));
       });
     });
