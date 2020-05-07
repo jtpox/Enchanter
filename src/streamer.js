@@ -178,6 +178,12 @@ export default class Streamer {
       return false;
     }
 
+    // Check if the episode has been played {VOD_CUTOFF_TIME} hours ago.
+    const timeLimit = Date.now() - (process.env.VOD_CUTOFF_TIME * 60 * 60 * 1000);
+    if (episode.lastPlayed > timeLimit) {
+      return false;
+    }
+
     this.requestEpisodes.push(episode);
     this.rpc.emit('requestsList', [this.requestEpisodes]);
 
