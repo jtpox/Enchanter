@@ -21,8 +21,7 @@ function stepDown(resolution, episode) {
 
   // Sort resolutions into ascending.
   // episode.hasResolution.sort((a, b) => a - b);
-  const resolutionArray = new Uint32Array(episode.hasResolution);
-  resolutionArray.sort();
+  const resolutionArray = new Uint32Array(episode.hasResolution).sort();
 
   for (let i = 0; i < resolutionArray.length; i += 1) {
     if (resolutionArray[i] > resolution) {

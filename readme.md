@@ -76,7 +76,7 @@ This will be the S3 service where the vods are stored
 ```
 S3_URL=http://s3.example.com/streams
 ```
-The playlist will be rendered centered  around the URL. For example, following the database example:
+The playlist will be rendered centered  around the URL. Following the database example:
 ```
 https://s3.example.com/streams/e8013a721b39ba502e10/720/fileSequence120.ts
 ```
