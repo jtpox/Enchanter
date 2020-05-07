@@ -1,6 +1,6 @@
 {
   "name": "enchanter",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A script which allows the live streaming of random pre-processed and chunked vods stored in S3.",
   "main": "enchanter.js",
   "scripts": {

@@ -26,9 +26,9 @@ HSL playlist example:
 #EXT-X-TARGETDURATION:10
 #EXT-X-MEDIA-SEQUENCE:226
 #EXTINF:10.000,
-https://s3.example.com/streams/ff3a4400c588a70563d9/720/fileSequence225.ts
+https://s3.example.com/streams/e8013a721b39ba502e10/720/fileSequence60.ts
 #EXTINF:10.000,
-https://s3.example.com/streams/ff3a4400c588a70563d9/720/fileSequence226.ts
+https://s3.example.com/streams/e8013a721b39ba502e10/720/fileSequence61.ts
 ```
 **ff3a4400c588a70563d9** is the folder (as stated in the database) where the chunked vods are stored in your S3 instance.
 
@@ -63,7 +63,7 @@ Episode
 	folder: e8013a721b39ba502e10, // Name of folder where chunks are stored in S3.
 	series: 5ea89d91d678ae502c3babc8, // Parent series ID.
 	enabled: true, // Will only be played if true.
-	hasResolution: [720, 1080], // Pre-processed in available resolution (only 720 and 1080).
+	hasResolution: [720, 1080], // Pre-processed in available resolution.
 }
 ```
 
@@ -98,9 +98,16 @@ Amount of time before vod can be played again (in hours).
 VOD_CUTOFF_TIME=6
 ```
 
+A range of available stream resolutions for playlists (separated by commas).
+
+If the vod does not have a resolution in the list, the next lowest will be chosen. For example, if 480 is not available, 720 will be chosen.
+```
+STREAM_RESOLUTION=1080,720
+```
+
 
 ### Adding Vods
-Vods are to be pre-processed into accepted resolutions (720p and 1080p) and cut into chunks specified in `STREAM_SEGMENT_TIME` and renamed as specified in `STREAM_FILE_NAME` where `{n}` is the playing sequence (starting from 0).
+Vods are to be pre-processed into accepted resolutions and cut into chunks specified in `STREAM_SEGMENT_TIME` and renamed as specified in `STREAM_FILE_NAME` where `{n}` is the playing sequence (starting from 0).
 
 For example, Nisemonogatari episode 8 is *1310s* long and the vod will be cut into 133 parts of chunks up to 10 seconds (according to `STREAM_SEGMENT_TIME`).
 
@@ -111,7 +118,7 @@ To run it normally: `node dist/enchanter.js`
 
 Recommended to run it in pm2: `pm2 start dist/enchanter.js`
 
-Viewing HLS playlist: http://example.com:8080/720||1080
+Viewing HLS playlist: http://example.com:8080/{STREAM_RESOLUTION}
 
 # Libraries Used
 
