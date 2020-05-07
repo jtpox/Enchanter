@@ -45,12 +45,15 @@ export default class Streamer {
     if (this.requestEpisodes.length > 0) {
       [series] = this.requestEpisodes;
       this.requestEpisodes.splice(0, 1);
-
       Winston.info(`Playing request: ${series.id}`);
     } else {
       series = await Episode.getRandom();
       Winston.info(`Playing random: ${series.id}`);
     }
+
+    // Set lastPlayed for  episode.
+    series.lastPlayed = Date.now();
+    await series.save();
 
     // Notify RPC.
     this.rpc.emit('seriesUpdate', series);

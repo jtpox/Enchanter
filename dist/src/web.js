@@ -18,10 +18,6 @@ var _winston2 = _interopRequireDefault(_winston);
 
 var _webMiddleware = require('./helper/webMiddleware');
 
-var _series = require('./model/series');
-
-var _series2 = _interopRequireDefault(_series);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 class WebService {

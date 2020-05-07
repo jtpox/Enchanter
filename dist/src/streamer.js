@@ -63,12 +63,15 @@ class Streamer {
     if (this.requestEpisodes.length > 0) {
       [series] = this.requestEpisodes;
       this.requestEpisodes.splice(0, 1);
-
       _winston2['default'].info('Playing request: ' + String(series.id));
     } else {
       series = await _episode2['default'].getRandom();
       _winston2['default'].info('Playing random: ' + String(series.id));
     }
+
+    // Set lastPlayed for  episode.
+    series.lastPlayed = Date.now();
+    await series.save();
 
     // Notify RPC.
     this.rpc.emit('seriesUpdate', series);

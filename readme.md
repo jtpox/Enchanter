@@ -93,6 +93,11 @@ The set time for every sequence in seconds.
 STREAM_SEGMENT_TIME=10
 ```
 
+Amount of time before vod can be played again (in hours).
+```
+VOD_CUTOFF_TIME=6
+```
+
 
 ### Adding Vods
 Vods are to be pre-processed into accepted resolutions (720p and 1080p) and cut into chunks specified in `STREAM_SEGMENT_TIME` and renamed as specified in `STREAM_FILE_NAME` where `{n}` is the playing sequence (starting from 0).

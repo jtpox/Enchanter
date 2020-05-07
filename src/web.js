@@ -6,8 +6,6 @@ import Winston from './helper/winston';
 
 import { registerStreamer, showPlaylist } from './helper/webMiddleware';
 
-import Series from './model/series';
-
 export default class WebService {
   constructor(streamer) {
     this.streamer = streamer;
