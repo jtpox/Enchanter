@@ -30,7 +30,7 @@ https://s3.example.com/streams/e8013a721b39ba502e10/720/fileSequence60.ts
 #EXTINF:10.000,
 https://s3.example.com/streams/e8013a721b39ba502e10/720/fileSequence61.ts
 ```
-**ff3a4400c588a70563d9** is the folder (as stated in the database) where the chunked vods are stored in your S3 instance.
+**e8013a721b39ba502e10** is the folder (as stated in the database) where the chunked vods are stored in your S3 instance.
 
 **fileSequence{n}.ts** is the sequence of the pre-processed and chunked vod.
 
