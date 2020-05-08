@@ -20,6 +20,7 @@ export default class WebService {
     this.app.use(Cors());
 
     this.app.use(registerStreamer(this.streamer));
-    this.app.get(`/:resolution(|${process.env.STREAM_RESOLUTION.split(',').join('|')})`, showPlaylist);
+    // process.env.STREAM_RESOLUTION.split(',').join('|')
+    this.app.get(`/:resolution(|${process.env.STREAM_RESOLUTION.replace(/,/g, '|')})`, showPlaylist);
   }
 }

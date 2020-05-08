@@ -34,7 +34,8 @@ class WebService {
     this.app.use((0, _cors2['default'])());
 
     this.app.use((0, _webMiddleware.registerStreamer)(this.streamer));
-    this.app.get('/:resolution(|' + String(process.env.STREAM_RESOLUTION.split(',').join('|')) + ')', _webMiddleware.showPlaylist);
+    // process.env.STREAM_RESOLUTION.split(',').join('|')
+    this.app.get('/:resolution(|' + String(process.env.STREAM_RESOLUTION.replace(/,/g, '|')) + ')', _webMiddleware.showPlaylist);
   }
 }
 exports['default'] = WebService;
