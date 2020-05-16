@@ -109,7 +109,7 @@ STREAM_RESOLUTION=1080,720
 ### Adding Vods
 Vods are to be pre-processed into accepted resolutions and cut into chunks specified in `STREAM_SEGMENT_TIME` and renamed as specified in `STREAM_FILE_NAME` where `{n}` is the playing sequence (starting from 0).
 
-For example, Nisemonogatari episode 8 is *1310s* long and the vod will be cut into 133 parts of chunks up to 10 seconds (according to `STREAM_SEGMENT_TIME`).
+For example, Nisemonogatari episode 8 is *1321s* long and the vod will be cut into 133 parts of chunks up to 10 seconds (according to `STREAM_SEGMENT_TIME`).
 
 The files are then to be uploaded into S3 according to the `folder`  variable in the `episodes` database object.
 
@@ -125,7 +125,7 @@ Viewing HLS playlist: http://example.com:8080/{STREAM_RESOLUTION}
  - [Mongoose](https://www.npmjs.com/package/mongoose)
  - [dotenv](https://www.npmjs.com/package/dotenv)
  - [express](https://www.npmjs.com/package/express)
- - [rpc-websockets](https://www.npmjs.com/package/mongoose)
+ - [rpc-websockets](https://www.npmjs.com/package/rpc-websockets)
  - [winston](https://www.npmjs.com/package/winston)
 
 # Author's Notes
