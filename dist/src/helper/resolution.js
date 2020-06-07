@@ -15,10 +15,8 @@ exports["default"] = stepDown;
  * 3) If not available, will return check step 1 with lowered resolution.
  */
 function stepDown(resolution, episode) {
-  if (episode.hasResolution.includes(resolution)) return resolution;
-
   return episode.hasResolution.reduce((total, res) => {
-    if (res < resolution) return res;
+    if (res <= resolution) return res;
     return total;
   });
 }
