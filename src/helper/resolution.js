@@ -9,21 +9,10 @@
  * 3) If not available, will return check step 1 with lowered resolution.
  */
 export default function stepDown(resolution, episode) {
-  if (episode.hasResolution.includes(resolution)) {
-    return resolution;
-  }
+  if (episode.hasResolution.includes(resolution)) return resolution;
 
-  // Sort resolutions into ascending.
-  // episode.hasResolution.sort((a, b) => a - b);
-  const resolutionArray = new Uint32Array(episode.hasResolution);
-  resolutionArray.sort();
-
-  for (let i = 0; i < resolutionArray.length; i += 1) {
-    if (resolutionArray[i] > resolution) {
-      return resolutionArray[i];
-    }
-  }
-
-  // Return lowest by default.
-  return resolutionArray[0];
+  return episode.hasResolution.reduce((total, res) => {
+    if (res < resolution) return res;
+    return total;
+  });
 }
