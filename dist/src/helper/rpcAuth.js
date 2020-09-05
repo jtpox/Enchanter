@@ -5,9 +5,5 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports["default"] = function (auth) {
-  if (auth.password === process.env.RPC_PASSWORD) {
-    return true;
-  }
-
-  return false;
+  return auth.password === process.env.RPC_PASSWORD;
 };
